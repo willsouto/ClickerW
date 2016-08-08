@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>ClickerW</title>
+<meta charset="utf-8" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+<style>
+	#target{
+		width:20px;
+		height:20px;
+		border-radius:10px;
+		background-color:red;
+		position:relative;
+		
+	}
+
+	.fontt{
+  		font-family: "Open Sans";
+  		font-size: 20px;
+  		font-variant: small-caps;
+  		font-weight: bold;
+  		color: white;
+	}	
+	.fonts{
+  		font-family: "Open Sans";
+  		font-size: 18px;
+  		font-variant: small-caps;9
+  		font-weight: normal;
+  		color: white;
+	}
+	.fontscore{
+  		font-family: "Open Sans";
+  		font-size: 25px;
+  		font-variant: small-caps;
+  		color: red;
+	}
+	.caixa{
+		border-style: solid;
+		width:600px;
+		height:400px;
+		margin: auto;
+		background-color: white;
+	}
+	.spaces{
+		padding-left:2em;
+	}
+
+</style>
+
+</head>
+<body bgcolor="#000000">
+
+	
+<center>
+	<p style="font-size:200%;" class="fontt"> ClickerW</p>
+	<span class="fontt"> Tempo de reação: </span><span class="fonts" id="tempo"> ? segundos </span>
+	<br />
+	<span class="fontt">Acertos: </span><span class="fonts" id="quantidade"> ? </span> <span class="fontt"><span class="spaces"></span>|<span class="spaces"></span>Erros: </span><span class="fonts" id="erro"> ? </span>
+	<br /><br />
+	<span class="fontt">TOP SCORE: </span><span class="fonts" id="topscore"> ? </span>
+	<br />
+	<br />
+	<span class=fontscore>SCORE: </span><span class="fontscore" id="score"> ? </span>
+	<br />
+	<!--<span class=fontt>teste: </span><span class="fonts" id="teste"> ? </span>-->
+	<br /><br />
+	<button id="start">Start</button>
+	<br />
+</center>
+
+	<div class="caixa" id="whiteb">
+
+
+	
+	
+		<div id="target"></div>
+
+		<script type="text/javascript">
+            var hits=0;
+            var ctime=0;
+            var htime=0;
+            var score=0;
+            var scoret=0;
+            var top=0;
+            var tops=0;
+            var miss=0;
+
+
+
+            document.getElementById("target").style.display="none";
+            
+
+            document.getElementById("start").onclick=function(){
+              document.getElementById("target").style.display="none";
+              hits=0;
+              ctime=0;
+              htime=0;
+              speed=0;
+              score=0;
+              scoret=0;
+              miss=0;
+              
+              
+              document.getElementById("tempo").innerHTML="? segundos";
+              document.getElementById("quantidade").innerHTML="?";
+              document.getElementById("score").innerHTML="?";
+              document.getElementById("erro").innerHTML="?";
+              
+
+              setTimeout(function(){document.getElementById("start").innerHTML="5s";document.getElementById("target").style.display="none";
+              setTimeout(function(){document.getElementById("start").innerHTML="4s";document.getElementById("target").style.display="none";
+              setTimeout(function(){document.getElementById("start").innerHTML="3s";document.getElementById("target").style.display="none";
+              setTimeout(function(){document.getElementById("start").innerHTML="2s";document.getElementById("target").style.display="none";
+              setTimeout(function(){document.getElementById("start").innerHTML="1s";document.getElementById("target").style.display="none";
+              setTimeout(function(){document.getElementById("start").innerHTML="Go!";
+                spawn();
+                  setTimeout(function(){document.getElementById("start").innerHTML="Restart";},3000);
+              } 
+              , 1000);
+              } 
+              , 1000);
+              }
+              , 1000);
+              }
+              , 1000);
+              }
+              , 1000);
+              }
+              , 1000);
+            }
+
+          
+
+            function spawn(){
+              document.getElementById("target").style.backgroundColor="red";
+              var size=Math.floor((Math.random() * 40) + 5);
+              var time=Math.random();
+              time=time*1600;
+
+              var ver = Math.floor((Math.random() * 90) - 1);
+              var hor = Math.floor((Math.random() * 90) - 1);
+              
+
+              
+
+                setTimeout(function(){
+                  ctime=Date.now();
+
+                  document.getElementById("target").style.top=ver+"%";
+                  document.getElementById("target").style.left=hor+"%";
+                  document.getElementById("target").style.width=size+"px";
+                  document.getElementById("target").style.height=size+"px";
+                  document.getElementById("target").style.borderRadius=size+"px";
+                  document.getElementById("target").style.display="block";
+                }, time);
+
+            } 
+
+
+            document.getElementById("whiteb").onclick=function(){
+              miss = miss + 1;
+              scoret = scoret-1000;
+              //document.getElementById("teste").innerHTML+=" "+"-1000";
+              document.getElementById("score").innerHTML=scoret;
+                if(tops<scoret){
+              tops = scoret;
+              document.getElementById("topscore").innerHTML=tops;
+            }
+              document.getElementById("erro").innerHTML=miss;
+
+            }
+
+
+            document.getElementById("target").onclick=function(){
+              hits++;
+              miss--;
+              htime=Date.now();
+
+              speed=(htime-ctime)/1000;
+
+              document.getElementById("tempo").innerHTML=speed+" segundos";
+              document.getElementById("quantidade").innerHTML=hits;
+              score=(500-((speed*100)^3))+1000
+              score=parseInt(score, 10);
+              //document.getElementById("teste").innerHTML+=" "+score;
+              scoret=scoret+score;
+              document.getElementById("score").innerHTML=scoret;
+              
+
+              //document.getElementById("target").style.display="none";
+              this.style.display="none";
+
+              spawn();
+            }
+
+            
+            </script>
+		</div></center>
+		</div>
+
+</body>
+</html>
